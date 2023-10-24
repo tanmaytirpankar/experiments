@@ -220,7 +220,7 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
     float alpha_f = innerProduct( R_f, R_f ) / max( innerProduct( P_f, AP_f ), NEARZERO_f );
     X_d = vectorCombination( 1.0, X_d, alpha_d, P_d );            // Next estimate of solution
     X_f = vectorCombination( 1.0f, X_f, alpha_f, P_f );
-    R_d = vectorCombination( 1.0, X_d, -alpha_d, AP_d );          // Residual
+    R_d = vectorCombination( 1.0, R_d, -alpha_d, AP_d );          // Residual
     R_f = vectorCombination( 1.0f, R_f, -alpha_f, AP_f );
     writeToFile(X_d);
 
