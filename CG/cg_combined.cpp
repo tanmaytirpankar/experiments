@@ -160,6 +160,11 @@ T innerProduct( const vec<T> &U, const vec<T> &V )          // Inner product of 
   return inner_product( U.begin(), U.end(), V.begin(), 0.0 );
 }
 
+double innerProduct( const vec<double> &U, const vec<float> &V )          // Inner product of U and V
+{
+  return inner_product( U.begin(), U.end(), V.begin(), 0.0 );
+}
+
 
 //======================================================================
 
@@ -174,8 +179,7 @@ T vectorNorm( const vec<T> &V )                       // Vector norm
 //======================================================================
 
 // Computes and returns the cosine similarity of the vector U and V.
-template<class T>
-T cosine_similarity(const vec<T> &U, const vec<T> &V) {
+double cosine_similarity(const vec<double> &U, const vec<float> &V) {
   return innerProduct(U, V) / (vectorNorm(U) * vectorNorm(V));
 }
 
@@ -218,6 +222,10 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
     //
     double alpha_d = innerProduct( R_d, R_d ) / max( innerProduct( P_d, AP_d ), NEARZERO );
     float alpha_f = innerProduct( R_f, R_f ) / max( innerProduct( P_f, AP_f ), NEARZERO_f );
+    cout << "Cosine Similarity: " <<
+    cosine_similarity(vectorCombination(0.0, X_d, alpha_d, P_d ),
+                      vectorCombination(0.0f, X_f, alpha_f, P_f)) << endl;
+
     X_d = vectorCombination( 1.0, X_d, alpha_d, P_d );            // Next estimate of solution
     X_f = vectorCombination( 1.0f, X_f, alpha_f, P_f );
     R_d = vectorCombination( 1.0, R_d, -alpha_d, AP_d );          // Residual
