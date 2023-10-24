@@ -219,9 +219,9 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
     double alpha_d = innerProduct( R_d, R_d ) / max( innerProduct( P_d, AP_d ), NEARZERO );
     float alpha_f = innerProduct( R_f, R_f ) / max( innerProduct( P_f, AP_f ), NEARZERO_f );
     X_d = vectorCombination( 1.0, X_d, alpha_d, P_d );            // Next estimate of solution
-    X_f = vectorCombination( 1.0, X_f, alpha_f, P_f );
+    X_f = vectorCombination( 1.0f, X_f, alpha_f, P_f );
     R_d = vectorCombination( 1.0, X_d, -alpha_d, AP_d );          // Residual
-    R_f = vectorCombination( 1.0, R_f, -alpha_f, AP_f );
+    R_f = vectorCombination( 1.0f, R_f, -alpha_f, AP_f );
     writeToFile(X_d);
 
     if ( vectorNorm( R_d ) < TOLERANCE_d ) {
@@ -229,9 +229,10 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
       break;             // Convergence test
     }
 
-    double beta = innerProduct( R_d, R ) / max( innerProduct( Rold, Rold ), NEARZERO );
-    double beta = innerProduct( R_d, R ) / max( innerProduct( Rold, Rold ), NEARZERO );
-    P = vectorCombination( 1.0, R, beta, P );             // Next gradient
+    double beta_d = innerProduct( R_d, R_d ) / max( innerProduct( Rold_d, Rold_d ), NEARZERO );
+    float beta_f = innerProduct( R_f, R_f ) / max( innerProduct( Rold_d, Rold_d ), NEARZERO );
+    P_d = vectorCombination( 1.0, R_d, beta_d, P_d );             // Next gradient
+    P_f = vectorCombination( 1.0f, R_f, beta_f, P_f );
     k++;
   }
 
@@ -241,5 +242,5 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
 
   cout << endl;
 
-  return X;
+  return X_d;
 }
