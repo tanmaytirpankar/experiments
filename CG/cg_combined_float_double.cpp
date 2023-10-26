@@ -57,7 +57,7 @@ int main()
   matrix<float> A_f = { { 3.96751, 1.59033 }, { 0.72374, 1.59008 } };
   vec<float> B_f = { 1.19822, 0.359596 };
 
-  data_file.open ("data_combined.csv");
+  data_file.open ("data_half.csv");
 
   cout << "Solves AX = B\n";
   print( "\nA:", A_d );
