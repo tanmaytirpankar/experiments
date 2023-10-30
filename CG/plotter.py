@@ -6,22 +6,22 @@ import csv
 x = []
 y = []
 
-with open('../build-debug/data_float.csv', 'r') as csvfile:
+with open('../build-debug/data_lp.csv', 'r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
         x.append(float(row[0]))
         y.append(float(row[1]))
 
-plt.plot(x, y, label='float!')
+plt.plot(x, y, label='lp!')
 
 x = []
 y = []
-with open('../build-debug/data_double.csv', 'r') as csvfile:
+with open('../build-debug/data_hp.csv', 'r') as csvfile:
     plots = csv.reader(csvfile, delimiter=',')
     for row in plots:
         x.append(float(row[0]))
         y.append(float(row[1]))
-plt.plot(x, y, label='double!')
+plt.plot(x, y, label='hp!')
 
 plt.xlabel('x')
 plt.ylabel('y')

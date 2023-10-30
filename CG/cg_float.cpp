@@ -8,6 +8,7 @@
 using namespace std;
 
 const float NEARZERO = 1.0e-10;       // interpretation of "zero"
+const u_int N = 2;
 
 using vec    = vector<float>;         // vector
 using matrix = vector<vec>;            // matrix (=collection of (row) vectors)
@@ -170,7 +171,7 @@ vec conjugateGradientSolver( const matrix &A, const vec &B )
   float TOLERANCE = 1.0e-10;
 
   // Number of vectors/rows in the matrix A.
-  int n = A.size();
+  int n = N;
 
   // Initializing vector X which will be set to the solution by the end of this algorithm.
   vec X( n, 0.0 );
@@ -205,7 +206,7 @@ vec conjugateGradientSolver( const matrix &A, const vec &B )
     k++;
   }
 
-  if(k == n) {
+  if(k == 10) {
     cout << "\nDid not converge in " << k << " iterations.\n";
   }
 

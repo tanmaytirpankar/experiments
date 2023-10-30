@@ -191,7 +191,6 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
 {
   // Setting a tolerance level which will be used as a termination condition for this algorithm
   double TOLERANCE_d = 1.0e-10;
-  float TOLERANCE_f = 1.0e-10;
 
   // Number of vectors/rows in the matrix A.
   int n = A_d.size();
@@ -238,7 +237,7 @@ vec<double> conjugateGradientSolver( const matrix<double> &A_d, const vec<double
     }
 
     double beta_d = innerProduct( R_d, R_d ) / max( innerProduct( Rold_d, Rold_d ), NEARZERO );
-    float beta_f = innerProduct( R_f, R_f ) / max( innerProduct( Rold_d, Rold_d ), NEARZERO );
+    float beta_f = innerProduct( R_f, R_f ) / max( innerProduct( Rold_f, Rold_f ), NEARZERO_f );
     P_d = vectorCombination( 1.0, R_d, beta_d, P_d );             // Next gradient
     P_f = vectorCombination( 1.0f, R_f, beta_f, P_f );
     k++;
